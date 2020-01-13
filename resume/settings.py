@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+# See 
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1k#q^2kr(q6znddy^w1)w+4=6!_rimfmqoc=-4lx80fz$05+o_'
@@ -118,6 +118,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 # Configure Django App for Heroku.
 import django_heroku
@@ -125,3 +129,7 @@ django_heroku.settings(locals())
 
 import django_heroku
 TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age= 1000)
+DATABASES['default'].update(db_from_env)
