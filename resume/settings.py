@@ -24,12 +24,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-value = DEBUG = True
-if value:
-    ALLOWED_HOSTS = ['.localhost:8000/rs/']
-else:
-    ALLOWED_HOSTS = ['.herokuapp.com/rs']
+#value = DEBUG = False
+#if value:
+   #ALLOWED_HOSTS = ['localhost/rs/']
+#else:
+ #   ALLOWED_HOSTS = ['https://online-resumeskj.herokuapp.com/rs']
 
+import socket
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = [".herokuapp.com/rs",]
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 
 # Application definition
 
